@@ -49,7 +49,9 @@ let thumbnailElement = null;
 let currentImage = 0;
 const playButton = document.getElementById("play-btn");
 const stopButton = document.getElementById("stop-btn");
+const reverseButton = document.getElementById("reverse-btn");
 let autoPlayFn = setInterval(nextPhoto, 3000);
+let autoPlayReverseFn;
 
 
 // Ciclo per inserimento dinamico immagini
@@ -93,6 +95,7 @@ playButton.disabled = true;
 
 playButton.addEventListener("click", function () {
     clearInterval(autoPlayFn);
+    clearInterval(autoPlayReverseFn);
     autoPlayFn = setInterval(nextPhoto, 3000);
     playButton.disabled = true;
     stopButton.disabled = false;
@@ -100,8 +103,19 @@ playButton.addEventListener("click", function () {
 
 stopButton.addEventListener("click", function () {
     clearInterval(autoPlayFn);
+    clearInterval(autoPlayReverseFn);
     playButton.disabled = false;
     stopButton.disabled = true;
+    reverseButton.disabled = false;
+})
+
+reverseButton.addEventListener("click", function () {
+    clearInterval(autoPlayFn);
+    clearInterval(autoPlayReverseFn);
+    autoPlayReverseFn = setInterval(prevPhoto, 3000);
+    playButton.disabled = false;
+    reverseButton.disabled = true;
+    stopButton.disabled = false;
 })
 
 // Selezione immagine da thumb
