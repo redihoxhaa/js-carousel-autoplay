@@ -35,9 +35,6 @@ function prevPhoto() {
     }
 }
 
-
-
-
 // OPERATIONS
 
 // Definizione variabili globali
@@ -74,6 +71,9 @@ for (let i = 0; i < imageList.length; i++) {
 // Dichiarazione NodeList items
 const itemsNode = document.querySelectorAll(".item");
 const thumbnailsNode = document.querySelectorAll(".thumbnail");
+const playButton = document.getElementById("play-btn");
+const stopButton = document.getElementById("stop-btn");
+let autoPlayFn = setInterval(nextPhoto, 3000);
 
 itemsNode[0].classList.add("active");
 thumbnailsNode[0].classList.add("thumb-active");
@@ -85,13 +85,21 @@ const shadowLayer = document.createElement("div");
 shadowLayer.classList.add("shadow-layer");
 itemsElement.append(shadowLayer);
 
-setInterval(nextPhoto, 3000);
+// Autoplay
+
 
 // Aggiunta event listener per scorrimento immagini
 nextChevron.addEventListener("click", nextPhoto);
 
-
 prevChevron.addEventListener("click", prevPhoto);
+
+//Aggiunta event listener bottoni
+playButton.addEventListener("click", function () {
+    autoPlayFn = setInterval(nextPhoto, 3000);
+})
+stopButton.addEventListener("click", function () {
+    clearInterval(autoPlayFn);
+})
 
 // Selezione immagine da thumb
 let thumbSelectorNode = document.querySelectorAll(".thumbnail");
