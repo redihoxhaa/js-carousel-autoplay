@@ -51,7 +51,7 @@ let currentImage = 0;
 const playButton = document.getElementById("play-btn");
 const stopButton = document.getElementById("stop-btn");
 let autoPlayFn = setInterval(nextPhoto, 3000);
-playButton.disabled = true;
+
 
 // Ciclo per inserimento dinamico immagini
 for (let i = 0; i < imageList.length; i++) {
@@ -90,8 +90,10 @@ nextChevron.addEventListener("click", nextPhoto);
 prevChevron.addEventListener("click", prevPhoto);
 
 //Aggiunta event listener bottoni
+playButton.disabled = true;
 playButton.addEventListener("click", function () {
-    setInterval(nextPhoto, 3000);
+    clearInterval(autoPlayFn);
+    autoPlayFn = setInterval(nextPhoto, 3000);
     playButton.disabled = true;
     stopButton.disabled = false;
 })
@@ -99,6 +101,7 @@ stopButton.addEventListener("click", function () {
     clearInterval(autoPlayFn);
     playButton.disabled = false;
     stopButton.disabled = true;
+
 
 })
 
