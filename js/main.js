@@ -48,6 +48,10 @@ let imageElement = null;
 let thumbnailImageContainer = null;
 let thumbnailElement = null;
 let currentImage = 0;
+const playButton = document.getElementById("play-btn");
+const stopButton = document.getElementById("stop-btn");
+let autoPlayFn = setInterval(nextPhoto, 3000);
+playButton.disabled = true;
 
 // Ciclo per inserimento dinamico immagini
 for (let i = 0; i < imageList.length; i++) {
@@ -71,34 +75,31 @@ for (let i = 0; i < imageList.length; i++) {
 // Dichiarazione NodeList items
 const itemsNode = document.querySelectorAll(".item");
 const thumbnailsNode = document.querySelectorAll(".thumbnail");
-const playButton = document.getElementById("play-btn");
-const stopButton = document.getElementById("stop-btn");
-let autoPlayFn = setInterval(nextPhoto, 3000);
 
 itemsNode[0].classList.add("active");
 thumbnailsNode[0].classList.add("thumb-active");
 thumbnailsNode[0].classList.remove("blacked");
-
 
 // Creazione shadow layer
 const shadowLayer = document.createElement("div");
 shadowLayer.classList.add("shadow-layer");
 itemsElement.append(shadowLayer);
 
-// Autoplay
-
-
 // Aggiunta event listener per scorrimento immagini
 nextChevron.addEventListener("click", nextPhoto);
-
 prevChevron.addEventListener("click", prevPhoto);
 
 //Aggiunta event listener bottoni
 playButton.addEventListener("click", function () {
-    autoPlayFn = setInterval(nextPhoto, 3000);
+    setInterval(nextPhoto, 3000);
+    playButton.disabled = true;
+    stopButton.disabled = false;
 })
 stopButton.addEventListener("click", function () {
     clearInterval(autoPlayFn);
+    playButton.disabled = false;
+    stopButton.disabled = true;
+
 })
 
 // Selezione immagine da thumb
