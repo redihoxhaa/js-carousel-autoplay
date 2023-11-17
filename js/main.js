@@ -1,6 +1,5 @@
 "use strict";
 
-
 // FUNCTIONS
 
 function nextPhoto() {
@@ -91,18 +90,18 @@ prevChevron.addEventListener("click", prevPhoto);
 
 //Aggiunta event listener bottoni
 playButton.disabled = true;
+
 playButton.addEventListener("click", function () {
     clearInterval(autoPlayFn);
     autoPlayFn = setInterval(nextPhoto, 3000);
     playButton.disabled = true;
     stopButton.disabled = false;
 })
+
 stopButton.addEventListener("click", function () {
     clearInterval(autoPlayFn);
     playButton.disabled = false;
     stopButton.disabled = true;
-
-
 })
 
 // Selezione immagine da thumb
